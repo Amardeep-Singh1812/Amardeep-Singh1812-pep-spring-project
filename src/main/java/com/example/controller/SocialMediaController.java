@@ -37,15 +37,14 @@ public class SocialMediaController {
     @PostMapping("/register")
     public ResponseEntity<Account> register(@RequestBody Account account) {
         Account newAccount =  accountService.register(account);
+        if(newAccount == null)
+            return ResponseEntity.status(400).build();
+
         if(newAccount.getAccountId() == null) {
             return ResponseEntity.status(409).build();
         }
-        if(newAccount != null) {
             return ResponseEntity.status(200)
                                  .body(newAccount);
-        }
-        else
-            return ResponseEntity.status(400).build();
     }
 
     @PostMapping("/login")
