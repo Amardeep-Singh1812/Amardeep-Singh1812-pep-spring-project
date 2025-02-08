@@ -20,7 +20,7 @@ public class AccountService {
         if(account.getUsername() == null || account.getPassword().length() < 4)
             return null;
         
-        Account existingAccount = accountRepository.findByUsernameAndPassword(account.getUsername(), account.getPassword());
+        Account existingAccount = accountRepository.findByUsername(account.getUsername());
         
         if(existingAccount != null)
             return account;
